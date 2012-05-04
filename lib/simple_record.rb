@@ -32,7 +32,7 @@ begin
   # comment out line below to test rails2 validations
   require 'active_model'
 rescue LoadError => ex
-  puts "ActiveModel not available, falling back."
+  #puts "ActiveModel not available, falling back."
 end
 require File.expand_path(File.dirname(__FILE__) + "/simple_record/validations")
 require File.expand_path(File.dirname(__FILE__) + "/simple_record/attributes")
@@ -182,7 +182,7 @@ module SimpleRecord
 
 
     if defined?(ActiveModel)
-      puts "Using ActiveModel validations."
+      #puts "Using ActiveModel validations."
       @@active_model = true
       extend ActiveModel::Naming
       include ActiveModel::Conversion
@@ -194,7 +194,7 @@ module SimpleRecord
       alias_method :am_valid?, :valid?
     else
       @@active_model = false
-      puts "NOT using ActiveModel validations."
+      #puts "NOT using ActiveModel validations."
       attr_accessor :errors
       include SimpleRecord::Callbacks
     end
@@ -448,7 +448,7 @@ module SimpleRecord
       #
 
     def save(options={})
-      puts 'SAVING: ' + self.inspect if SimpleRecord.logging?
+      #puts 'SAVING: ' + self.inspect if SimpleRecord.logging?
         # todo: Clean out undefined values in @attributes (in case someone set the attributes hash with values that they hadn't defined)
       clear_errors
         # todo: decide whether this should go before pre_save or after pre_save? pre_save dirties "updated" and perhaps other items due to callbacks
@@ -514,7 +514,7 @@ module SimpleRecord
     end
 
     def create(options) #:nodoc:
-      puts '3 create'
+      #puts '3 create'
       ret = true
       _run_create_callbacks do
         x = do_actual_save(options)
@@ -526,7 +526,7 @@ module SimpleRecord
 
 #
     def update(options) #:nodoc:
-      puts '3 update'
+      #puts '3 update'
       ret = true
       _run_update_callbacks do
         x = do_actual_save(options)
@@ -603,7 +603,7 @@ module SimpleRecord
           # all clobs in one chunk
           # using json for now, could change later
           val = all_clobs.to_json
-          puts 'val=' + val.inspect
+          #puts 'val=' + val.inspect
           put_lob(single_clob_id, val, :s3_bucket=>:new)
         else
           dirty_clobs.each_pair do |k, val|
@@ -713,7 +713,7 @@ module SimpleRecord
 #      validate()
 #      is_create ? validate_on_create : validate_on_update
       if !valid?
-        puts 'not valid'
+        #puts 'not valid'
         return false
       end
 #

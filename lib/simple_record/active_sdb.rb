@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2008 RightScale Inc
 #
@@ -242,7 +243,7 @@ module SimpleRecord
           #
         def create_domain(dom=nil)
           dom = domain if dom.nil?
-          puts "Creating new SimpleDB Domain: " + dom
+         #puts "Creating new SimpleDB Domain: " + dom
           connection.create_domain(dom)
         end
 
@@ -255,7 +256,7 @@ module SimpleRecord
           #
         def delete_domain(dom=nil)
           dom = domain if dom.nil?
-          puts "!!! DELETING SimpleDB Domain: " + dom
+           "!!! DELETING SimpleDB Domain: " + dom
           connection.delete_domain(dom)
         end
 
@@ -391,7 +392,7 @@ module SimpleRecord
           else
             # if a bunch of records was requested then return check that we found all of them
             # and return as an array
-            puts 'is_sharded? ' + is_sharded?.to_s
+           #puts 'is_sharded? ' + is_sharded?.to_s
             unless is_sharded? || args.size == result[:items].size
               # todo: might make sense to return the array but with nil values in the slots where an item wasn't found?
               id_list = args.map { |i| "'#{i}'" }.join(',')
